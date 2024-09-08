@@ -1,5 +1,5 @@
 """
-ASGI config for tugas_2 project.
+ASGI config for Toko ᗜˬᗜproject.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tugas_2.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Toko ᗜˬᗜ.settings')
 
 application = get_asgi_application()
