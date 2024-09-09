@@ -1,24 +1,51 @@
 from django.shortcuts import render
-from django.templatetags.static import static
 
 def show_main(request):
     context = {
-        'nama' : 'Fumo Cirno V1.5 Touhou Project Plushie + Bonus Pin - Down Payment',
-        'deskripsi': '''BARANG PRE ORDER
-
-    Fumo Cirno V1.5 dengan bonus pin fumonya
-    
-    Tutup PO 02 Oktober 2024
-    
-    Release date : April 2025, kemungkinan sampai sini sekitar Mei - Juni 2025
-    
-    Per fumo maksimal pemesanan 3 slot. (sisa 2 slot)
-    
-    Note,
-    
-    Untuk pembayaran via DP, silahkan pilih varian Down Payment. Setelah itu akan dikirim barang dummy berupa invoice atau yang lainnya. Jika barang sudah sampai di Indonesia akan dikontak melalui nomor HP yang digunakan ketika pre order dan melakukan pelunasan dengan membeli produk ini lagi dengan varian Pelunasan.''',
-        'harga': '500000',
-        'image': static('gambar_untuk_tugas2_pbp.jpg'),
+        'products': [
+            {
+                'nama': 'Fumo Cirno Touhou Project Plushie',
+                'harga': 'Harga: Rp500.000',
+                'deskripsi': 'wleowleo',
+                'image': 'https://imgur.com/7QgART5.jpeg',
+                'stok': 'Stok: 3'
+            },
+            {
+                'nama': 'Fumo Reimu Hakurei Touhou Project Plushie',
+                'harga': 'Harga: Rp500.000',
+                'deskripsi': 'wleowleo',
+                'image': 'https://imgur.com/T08ac3K.jpeg',
+                'stok': 'Stok: 3'
+            },
+            {
+                'nama': 'Fumo Koishi Komeji Touhou Project Plushie',
+                'harga': 'Harga: Rp500.000',
+                'deskripsi': 'wleowleo',
+                'image': 'https://i.imgur.com/eNe8RTJ.jpeg',
+                'stok': 'Stok: 3'
+            },
+            {
+                'nama': 'Fumo Marisa Kirisame Touhou Project Plushie',
+                'harga': 'Harga: Rp500.000',
+                'deskripsi': 'wleowleo',
+                'image': 'https://imgur.com/5Mg568I.jpeg',
+                'stok': 'Stok: 3'
+            },
+            {
+                'nama': 'Fumo Youmu Konpaku Touhou Project Plushie',
+                'harga': 'Harga: Rp500.000',
+                'deskripsi': 'wleowleo',
+                'image': 'https://imgur.com/5MeXVZm.jpeg',
+                'stok': 'Stok: 3'
+            },
+            {
+                'nama': 'Fumo Tenshi Hinanawi Touhou Project Plushie',
+                'harga': 'Harga: Rp500.000',
+                'deskripsi': 'wleowleo',
+                'image': 'https://imgur.com/akw6Amw.jpeg',
+                'stok': 'Stok: 3'
+            }
+        ]
     }
 
     return render(request, "main.html", context)

@@ -1,10 +1,25 @@
-<h1>Toko ᗜˬᗜ</h1>
-<audio controls autoplay loop src="video_untuk_tugas2_pbp.mp4"></audio>
-<h3>Nama Barang</h3>
-<p>{{ nama }}</p>
-<img src="{{ image }}" alt="image">
-<h3>Harga</h3>
-<h2>{{ harga }}</h2>
-<h3>Deskripsi Barang</h3>
-<p>{{ deskripsi }}</p>
-<h4>Stok: 3</h4>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Toko ᗜˬᗜ</h1>
+
+    {% for product in products %}
+    <div class="card">
+        <h2>{{ product.nama }}</h2>
+        <img src={{product.image}}>
+        <h2>{{ product.harga}}</h2>
+        <p>{{ product.deskripsi }}</p>
+        <h3>{{ product.stok }}</h3>
+
+    </div>
+    {% endfor %}
+</body>
+
+</html>
