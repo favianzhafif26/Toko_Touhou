@@ -4,3 +4,4 @@ class TokoEntry(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     description = models.TextField()
+    quantity = models.IntegerField()
