@@ -13,4 +13,4 @@ class mainTest(TestCase):
 
     def test_nonexistent_page(self):
         response = Client().get('/skibidi/')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 404) 
