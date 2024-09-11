@@ -3,7 +3,7 @@ from django.shortcuts import render
 def show_main(request):
     context = {
         'products': [
-            {
+            { 
                 'nama': 'Fumo Cirno Touhou Plushie',
                 'harga': 'Harga: Rp500.000',
                 'deskripsi': 'Dijual plushie Fumo Cirno dari series Touhou dengan harga terjangkau (size: 23x14cm)',
