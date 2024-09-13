@@ -1,5 +1,5 @@
 # Toko Touhou ᗜˬᗜ
-
+# PWS Link : http://favian-zhafif-touhou.pbp.cs.ui.ac.id/
 ## Tugas 2 PBP 2024/2025
 ### Cara Pengimplementasian Step-by-Step
 1. Membuat Proyek Django Baru
