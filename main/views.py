@@ -1,79 +1,47 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from main.forms import ItemEntryForm
+from main.models import ItemEntry
+from django.http import HttpResponse
+from django.core import serializers
 
 def show_main(request):
+    item_entries = ItemEntry.objects.all()
     context = {
-        'products': [
-            { 
-                'nama': 'Fumo Cirno Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Cirno dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/NmB6s4k.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Reimu Hakurei Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Reimu Hakurei dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/T08ac3K.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Koishi Komeji Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Koishi Komeji dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://i.imgur.com/eNe8RTJ.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Marisa Kirisame Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Marisa Kirisame dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/5Mg568I.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Youmu Konpaku Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Youmu Konpaku dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/5MeXVZm.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Tenshi Hinanawi Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Tenshi Hananawi dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/akw6Amw.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Flandre Scarlet Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Flandre Scarlet dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/k9roVO7.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Yuuka Kazami Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Yuuka Kazami dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/osr3NDB.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Patchouli Knowledge Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Patchouli Knowledge dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/T3H3Kah.jpeg',
-                'stok': 'Stok: 3'
-            },
-            {
-                'nama': 'Fumo Reisen Udongein Touhou Plushie',
-                'harga': 'Harga: Rp500.000',
-                'deskripsi': 'Dijual plushie Fumo Reisen Udongein dari series Touhou dengan harga terjangkau (size: 23x14cm)',
-                'image': 'https://imgur.com/hE4c2aK.jpeg',
-                'stok': 'Stok: 3'
+        'identity':{
+                'nama': 'Nama: Favian Zhafif Rizqullah Permana',
+                'npm': 'NPM: 2306274996',
+                'kelas': 'Kelas: PBP-D',
+        },
+        'products':     
+                {
+                'item_entries': item_entries
             }
-        ]
     }
 
     return render(request, "main.html", context)
+
+def create_item_entry(request):
+    form = ItemEntryForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return redirect('main:show_main')
+
+    context = {'form': form}
+    return render(request, "create_item_entry.html", context)
+
+def show_xml(request):
+    data = ItemEntry.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    data = ItemEntry.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_xml_by_id(request, id):
+    data = ItemEntry.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json_by_id(request, id):
+    data = ItemEntry.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
