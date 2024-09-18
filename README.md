@@ -2,7 +2,7 @@
 # Toko Touhou ᗜˬᗜ
 An E-Commerce Web for the Touhou Series fandom
 
-### E-Commerce Web is made by:
+### E-Commerce Web is made by:  
 **Name**: Favian Zhafif Rizqullah Permana  
 **Student ID**: 2306274996  
 **Class**: PBP-D  
