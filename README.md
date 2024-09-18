@@ -333,4 +333,11 @@ urlpatterns = [
 ```
 
 ## Pengaksesan semua contoh formal URL di Postman
-![XML](https://imgur.com/1ikdUZq)
+## XML
+![XML](https://i.imgur.com/1ikdUZq.png)
+## JSON
+![JSON](https://i.imgur.com/xS3zc7s.png)
+## XML by ID
+![XML by ID](https://i.imgur.com/v7bnusw.png)
+## JSON by ID
+![JSON by ID](https://i.imgur.com/rgEkwah.png)
