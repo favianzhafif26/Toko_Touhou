@@ -1,5 +1,14 @@
+---
 # Toko Touhou ᗜˬᗜ
-# PWS Link : http://favian-zhafif-tokotouhou.pbp.cs.ui.ac.id/
+An E-Commerce Web for the Touhou Series fandom
+
+### E-Commerce Web is made by:
+**Name**: Favian Zhafif Rizqullah Permana  
+**Student ID**: 2306274996  
+**Class**: PBP-D  
+
+# Live version here : [Toko Touhou ᗜˬᗜ](http://favian-zhafif-tokotouhou.pbp.cs.ui.ac.id/) 
+---
 ## Tugas 2 PBP 2024/2025
 ### Cara Pengimplementasian Step-by-Step
 1. Membuat Proyek Django Baru
@@ -10,7 +19,7 @@ Step kedua adalah membuat sebuah aplikasi bernama `main` dengan menggunakan comm
 
 3. Mengkonfigurasi Routing terhadap Aplikasi Main
 Step Ketiga adalah konfigurasi routing supaya aplikasi main bisa disertakan. Dalam file urls.py, saya menambahkan kode agar URL dapat dikelola oleh aplikasi:
-```
+```python
 from django.urls import path, include
 from django.contrib import admin
 
@@ -22,7 +31,7 @@ urlpatterns = [
 
 4. Membuat Model "Product" pada Main
 Step keempat adalah membuat sebuah model Product dalam file models.py. Atribut yang tercakup seperti name, price, description, dan quantity (punya saya). Step ini bertujuan untuk menyimpan data product.
-```
+```python
 from django.db import models
 
 class TokoEntry(models.Model):
@@ -34,7 +43,7 @@ class TokoEntry(models.Model):
 
 5. Membuat View pada Main
 Step kelima adalah membuat sebuah view dalam file views.py. Step ini untuk rendering template dari file main.html.
-```
+```python
 from django.shortcuts import render
 
 def show_main(request):
@@ -118,7 +127,7 @@ def show_main(request):
 
 6. Menambahkan Routing di urls.py pada Main
 Step keenam adalah menambahkan routing urls.py di aplikasi main. Step ini bertujuan untuk memastikan view dapat diakses di URL.
-```
+```python
 from django.urls import path
 from main.views import show_main
 
@@ -159,8 +168,18 @@ Django menyediakan struktur yang jelas dan mengikuti prinsip "konvensi di atas k
 ## Mengapa model pada Django disebut sebagai ORM?
 Model dalam Django disebut sebagai ORM (Object-Relational Mapping) karena Django menggunakan pendekatan ORM untuk memetakan objek Python ke tabel-tabel dalam database relasional. Dengan ORM, kode Python dapat digunakan untuk berinteraksi dengan database tanpa menulis SQL secara langsung. ORM memudahkan operasi database seperti penyimpanan, pengambilan, pembaruan, dan penghapusan data melalui objek Python, sehingga meningkatkan produktivitas dan meminimalkan kemungkinan kesalahan.
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 ## Tugas 3 PBP 2024/2025
 
-## Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+## Kenapa kita memerlukan data delivery untuk platform
+Data delivery adalah proses server menyampaikan data kepada client. Data delivery ini tentu sangat penting, karena dengan data delivery, kita dapat mengirimkan data secara langsung sesuai dengan keinginan client. Data delivery juga membuat proses pengiriman data kepada client jauh lebih cepat dan efisien yang pasti akan berpengaruh dengan kenikmatan pengalaman client.
+
+## Lebih baik menggunakan JSON atau XML? Mengapa JSON lebih populer dipakai dibandingkan dengan XML
+- JSON menghasilkan file yang lebih kecil dari XML karena tidak diperlukannya tag pernutup.
+- JSON mempunyai sintaks yang biasanya lebih mudah untuk dibaca pengguna dan mesin.
+- JSON terintegrasi dengan JavaScript, oleh karena itu JSON lebih mudah untuk diimplementasikan saat pembuatan web.
+
+## Fungsi method ```is_valid()``` pada form Django
+
+---
