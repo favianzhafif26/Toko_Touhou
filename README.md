@@ -180,6 +180,6 @@ Data delivery adalah proses server menyampaikan data kepada client. Data deliver
 - JSON mempunyai sintaks yang biasanya lebih mudah untuk dibaca pengguna dan mesin.
 - JSON terintegrasi dengan JavaScript, oleh karena itu JSON lebih mudah untuk diimplementasikan saat pembuatan web.
 
-## Fungsi method ```is_valid()``` pada form Django
+## Fungsi method '''is_valid()''' pada form Django
 
 ---
