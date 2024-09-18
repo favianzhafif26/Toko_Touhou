@@ -1,11 +1,11 @@
 ---
 # Toko Touhou ᗜˬᗜ
-An E-Commerce Web for the Touhou Series fandom
+An E-Commerce Web for the Touhou Series fandom  
 
-### E-Commerce Web is made by:  
-**Name**: Favian Zhafif Rizqullah Permana  
-**Student ID**: 2306274996  
-**Class**: PBP-D  
+### This E-Commerce Web is made by  
+- Favian Zhafif Rizqullah Permana  
+- 2306274996  
+- PBP-D  
 
 # Live version here : [Toko Touhou ᗜˬᗜ](http://favian-zhafif-tokotouhou.pbp.cs.ui.ac.id/) 
 ---
@@ -180,6 +180,6 @@ Data delivery adalah proses server menyampaikan data kepada client. Data deliver
 - JSON mempunyai sintaks yang biasanya lebih mudah untuk dibaca pengguna dan mesin.
 - JSON terintegrasi dengan JavaScript, oleh karena itu JSON lebih mudah untuk diimplementasikan saat pembuatan web.
 
-## Fungsi method '''is_valid()''' pada form Django
+## Fungsi method '''is_valid()''' pada form Django  
 
 ---
