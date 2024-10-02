@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from main.forms import ItemEntryForm
 from main.models import ItemEntry
 from django.http import HttpResponse, HttpResponseRedirect
@@ -39,7 +39,7 @@ def create_item_entry(request):
         ItemEntry.save()
         return redirect('main:show_main')
 
-    context = {'form': form}
+    context = {'form': form}    
     return render(request, "create_item_entry.html", context)
 
 def show_xml(request):
@@ -91,3 +91,20 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_item(request, id):
+    item = ItemEntry.objects.get(pk = id)
+
+    form = ItemEntryForm(request.POST or None, instance=item)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_item.html", context)
+
+def delete_item(request, id):
+    item = ItemEntry.objects.get(pk = id)
+    item.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
