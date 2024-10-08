@@ -11,9 +11,10 @@
 <body class="bg-purple-900 text-white text-center">
 
     {% extends 'base.html' %}
+    {% load static %}
     {% block content %}
     {% include 'navbar.html' %}
-    
+
     <div class="justify-center mt-10">
         <div class="bg-purple-950 py-6">
             <h1 class="text-4xl text-pink-500">Toko Touhou ᗜˬᗜ</h1>
@@ -26,58 +27,73 @@
             <h3 class="text-lg font-bold">{{ identity.nama }}</h3>
             <h3>{{ identity.npm }}</h3>
             <h3>{{ identity.kelas }}</h3>
-            <img src="https://i.imgur.com/j6W2Ko4.jpeg" alt="Developer Image" class="mt-4 mx-auto rounded-lg w-48 h-72 hover:scale-110 transition-transform duration-1000">
+            <img src="https://i.imgur.com/j6W2Ko4.jpeg" alt="Developer Image"
+                class="mt-4 mx-auto rounded-lg w-48 h-72 hover:scale-110 transition-transform duration-1000">
         </div>
     </div>
 
-    {% if not products.item_entries %}
-    <p class="mt-10">Belum ada data item pada toko touhou.</p>
-    {% else %}
-    <div class="overflow-x-auto mt-10">
-        <table class="min-w-full table-auto bg-purple-800 text-pink-300">
-            <thead>
-                <tr>
-                    <th class="py-2 px-4 border-b border-pink-500">Item Name</th>
-                    <th class="py-2 px-4 border-b border-pink-500">Price</th>
-                    <th class="py-2 px-4 border-b border-pink-500">Description</th>
-                    <th class="py-2 px-4 border-b border-pink-500">Item Quantity</th>
-                    <th class="py-2 px-4 border-b border-pink-500">Item Image</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item_entry in products.item_entries %}
-                <tr class="border-t border-pink-500">
-                    <td class="py-2 px-4 border-b border-pink-500">{{ item_entry.name }}</td>
-                    <td class="py-2 px-4 border-b border-pink-500">{{ item_entry.price }}</td>
-                    <td class="py-2 px-4 border-b border-pink-500">{{ item_entry.description }}</td>
-                    <td class="py-2 px-4 border-b border-pink-500">{{ item_entry.quantity }}</td>
-                    <td class="py-2 px-4 border-b border-pink-500 flex items-center justify-center">
-                        <img src="{{ item_entry.image }}" class="w-20 h-20">
-                    </td>
-                </tr>
+    <div id="item_entry_cards"></div>
 
-                <tr>
-                    <td colspan="5" class="py-2 px-4">
-                        <div class="flex space-x-4 justify-center">
-                            <a href="{% url 'main:edit_item' item_entry.pk %}">
-                                <button class="bg-purple-900 text-pink-400 py-2 px-4 rounded hover:bg-indigo-600">Edit</button>
-                            </a>
-                            <a href="{% url 'main:delete_item' item_entry.pk %}">
-                                <button class="bg-purple-900 text-pink-400 py-2 px-4 rounded hover:bg-red-600">Delete</button>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
+    <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 border-b rounded-t">
+        <h3 class="text-xl font-semibold text-gray-900">
+            Add New Item Entry
+        </h3>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" id="closeModalBtn">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Close modal</span>
+        </button>
+        </div>
+        <!-- Modal body -->
+        <div class="px-6 py-4 space-y-6 form-style">
+        <form id="itemEntryForm">
+            <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter your Item" required style="color: black;" >
+            </div>
+            <div class="mb-4">
+            <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+            <input type="number" id="price" name="price" min="1" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="What's the price?" required style="color: black;">
+            </div>
+            <div class="mb-4">
+            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea id="description" name="description" rows="3" class="mt-1 block w-full h-52 resize-none border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="What's the description?" required style="color: black;"></textarea>
+            </div>
+            <div class="mb-4">
+            <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1"
+            
+            class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="How much?" required style="color: black;">
+            </div>
+            <div class="mb-4">
+            <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+            <input id="image" name="image" min="1" max="10" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter the image" required style="color: black;">
+            </div>
+            
+        </form>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 p-6 border-t border-gray-200 rounded-b justify-center md:justify-end">
+        <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg" id="cancelButton">Cancel</button>
+        <button type="submit" id="submitItemEntry" form="itemEntryForm" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Save</button>
+        </div>
     </div>
-    {% endif %}
+
+    </div>
+
 
     <div class="mt-10 space-x-4">
         <a href="{% url 'main:create_item_entry' %}">
             <button class="bg-pink-500 text-purple-900 py-2 px-6 rounded hover:bg-pink-600">Add New item Entry</button>
         </a>
+        <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-pink-500 text-purple-900 hover:bg-pink-600 text-white py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
+            Add New Item Entry by AJAX
+        </button>
+      
         <a href="{% url 'main:logout' %}">
             <button class="bg-pink-500 text-purple-900 py-2 px-6 rounded hover:bg-pink-600">Logout</button>
         </a>
@@ -87,6 +103,117 @@
         <h5 class="text-pink-300">User: {{ user_name }}</h5>
         <h5 class="text-pink-300">Sesi terakhir login: {{ last_login }}</h5>
     </div>
+
+    <script>
+        function addItemEntry() {
+            fetch("{% url 'main:add_item_entry_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#itemEntryForm')),
+            })
+            .then(response => refreshItemEntries())
+
+            document.getElementById("itemEntryForm").reset(); 
+            document.querySelector("[data-modal-toggle='crudModal']").click();
+
+            return false;
+        }
+        async function getItemEntries() {
+            return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+        }
+        async function refreshItemEntries() {
+            document.getElementById("item_entry_cards").innerHTML = "";
+            document.getElementById("item_entry_cards").className = "";
+            const itemEntries = await getItemEntries();
+            let htmlString = "";
+            let classNameString = "";
+
+            if (itemEntries.length === 0) {
+                classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+                htmlString = `
+                <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                    <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+                    <p class="text-center text-gray-600 mt-4">Belum ada data item pada Toko Touhou.</p>
+                </div>
+            `;
+            }
+            else {
+                classNameString = "columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full"
+                itemEntries.forEach((item) => {
+                    const name = DOMPurify.sanitize(item.fields.name);
+                    const price = DOMPurify.sanitize(item.fields.price);
+                    const description = DOMPurify.sanitize(item.fields.description);
+                    const quantity = DOMPurify.sanitize(item.fields.quantity);
+                    const image = DOMPurify.sanitize(item.fields.image);
+                    htmlString += `
+                <div class="relative break-inside-avoid">
+                    <div class="w-full max-w-sm bg-white border border-pink-700 rounded-lg shadow dark:bg-pink-700 dark:border-pink-700">
+                        <a href="#">
+                            <img class="p-8 rounded-t-lg w-full object-cover" src="${item.fields.image}" alt="item image" />
+                        </a>
+                        <div class="px-5 pb-5">
+                            <a href="#">
+                                <h5 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-pink-300 text-start">${item.fields.name}</h5>
+                                <h5 class="text-xl tracking-tight text-gray-900 dark:text-pink-300 text-start">${item.fields.description}</h5>
+                            </a>
+                            <h5 class="text-2xl font-bold text-gray-900 dark:text-pink-300 text-start">Rp.${item.fields.price}</h5>  
+                            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-pink-300 text-start">Stock: ${item.fields.quantity}</h5>
+                            <div class="flex flex-col gap-2 mt-4">
+                                <a href="/edit-item/${item.pk}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                    </svg>
+                                </a>
+                                <a href="/delete/${item.pk}" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+                });
+            }
+            document.getElementById("item_entry_cards").className = classNameString;
+            document.getElementById("item_entry_cards").innerHTML = htmlString;
+        }
+        refreshItemEntries();
+        const modal = document.getElementById('crudModal');
+        const modalContent = document.getElementById('crudModalContent');
+
+        function showModal() {
+            const modal = document.getElementById('crudModal');
+            const modalContent = document.getElementById('crudModalContent');
+
+            modal.classList.remove('hidden'); 
+            setTimeout(() => {
+                modalContent.classList.remove('opacity-0', 'scale-95');
+                modalContent.classList.add('opacity-100', 'scale-100');
+            }, 50); 
+        }
+
+        function hideModal() {
+            const modal = document.getElementById('crudModal');
+            const modalContent = document.getElementById('crudModalContent');
+
+            modalContent.classList.remove('opacity-100', 'scale-100');
+            modalContent.classList.add('opacity-0', 'scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150); 
+        }
+
+        document.getElementById("cancelButton").addEventListener("click", hideModal);
+        document.getElementById("closeModalBtn").addEventListener("click", hideModal);
+        document.getElementById("itemEntryForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        addItemEntry();
+        })
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+
 
     {% endblock content %}
 </body>
