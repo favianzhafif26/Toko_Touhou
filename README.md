@@ -525,3 +525,71 @@ d. Menampilkan detail informasi dan menerapkan cookies pada last login
         <h5>Sesi terakhir login: {{ last_login }}</h5>
     ```
 ---
+
+## Tugas 5 PBP 2024/2025
+
+### Urutan Prioritas CSS Selector 
+Jika ada beberapa CSS selector yang diterapkan pada satu elemen HTML, prioritasnya ditentukan sebagai berikut:
+1. inline styles memiliki prioritas tertinggi `(contoh: style="color: blue;")`.
+2. ID selector (#id) memiliki prioritas lebih tinggi dibandingkan class selector atau tag selector.
+3. Class selector, attribute selector, dan pseudo-class.
+4. Tag selector (elemen) memiliki prioritas paling rendah.
+Namun, penggunaan !important dapat mengabaikan urutan prioritas ini dan menjadikan style tersebut paling diutamakan.
+
+### Mengapa responsive design penting dalam pengembangan aplikasi web?
+Desain responsif memungkinkan halaman web menyesuaikan tampilannya dengan berbagai ukuran layar. Hal ini penting karena:
+Peningkatan Pengguna Mobile, SEO (Search Engine Optimization) situs yang mobile-friendly mendapat peringkat lebih tinggi di mesin pencari, desain responsif meningkatkan kenyamanan pengguna, satu kode HTML dapat digunakan untuk semua perangkat, sehingga lebih efisien dalam pengembangan dan pemeliharaan.
+Contoh aplikasi yang sudah responsif adalah Google yang sudah responsif di berbagai perangkat.
+
+### Perbedaan Margin, Border, dan Padding 
+Margin: Ruang di luar elemen yang memisahkannya dari elemen lain.
+Border: Garis yang mengelilingi elemen, berada di antara padding dan margin.
+Padding: Ruang di dalam elemen, antara konten dan border.
+
+cara implementasi:
+```css
+div {
+    margin: 20px; 
+    border: 2px solid black;
+    padding: 10px;
+}
+```
+
+###  Konsep flex box dan grid layout beserta kegunaannya
+- Flexbox adalah model layout satu dimensi yang memungkinkan penataan elemen secara fleksibel dalam baris atau kolom, ideal untuk layout yang responsif.
+- Grid Layout adalah model layout dua dimensi yang memungkinkan penataan elemen dalam baris dan kolom, cocok untuk tata letak yang lebih kompleks.
+
+### Implementasi Checklist Step-by-Step
+- Fitur Edit dan Delete Produk
+  Menambahkan tombol untuk mengedit dan menghapus produk, serta memanggil fungsi yang sesuai di backend.
+  ```python
+    def edit_item(request, id):
+    item = ItemEntry.objects.get(pk = id)
+
+    form = ItemEntryForm(request.POST or None, instance=item)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_item.html", context)
+
+    def delete_item(request, id):
+        item = ItemEntry.objects.get(pk = id)
+        item.delete()
+        return HttpResponseRedirect(reverse('main:show_main'))
+  ```   
+  
+- Kustomisasi Halaman Login, Register, dan Tambah Produk: Menggunakan Tailwind CSS untuk membuat tampilan yang clean dan modern.
+- Kustomisasi Halaman Daftar Produk: Membuat layout card untuk setiap produk yang ditampilkan.
+- Responsive Navbar: Mengimplementasikan navbar yang responsif dengan perubahan ke hamburger menu pada versi mobile.
+
+### Hasil Implementasi
+![image](https://github.com/user-attachments/assets/7d5d08b6-95be-4c3f-8d46-d3d05fab7231)
+![image](https://github.com/user-attachments/assets/2e17b456-0668-42b5-ba39-bed90fc83cdd)
+![image](https://github.com/user-attachments/assets/19754cf9-eb3d-4edc-b6b5-cd83d4a1b57d)
+![image](https://github.com/user-attachments/assets/f24b1694-5c59-47e5-8311-7e87248fa255)
+![image](https://github.com/user-attachments/assets/674093e1-2b72-484d-9c89-5eabe64b69fa)
+![image](https://github.com/user-attachments/assets/76c8a039-c711-4630-8886-d4418ba80344)
+---
