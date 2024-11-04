@@ -1,0 +1,41 @@
+favianzhafif26: 
+  name: Favian Zhafif Rizqullah Permana
+  title: CS Student in Universitas Indonesia
+  url: https://github.com/favianzhafif26
+  image_url: https://i.pinimg.com/736x/c7/79/12/c77912540ae464241aa60ca73320f916.jpg
+  page: true
+  socials:
+    github: favianzhafif26
+
+Adiieeee:
+  name: Muhammad Adiansyah
+  title: CS Student in Universitas Indonesia
+  url: https://github.com/Adiieeee
+  image_url: https://connectanatolia.com/upload/product/410x300/638216469087823630tost-peyniri-tam-yagli-600-g-idznc2hu00ud.jpg
+  page: true
+  socials:
+    github: Adiieeee
+
+yangshun:
+  name: Yangshun Tay
+  title: Front End Engineer @ Facebook
+  url: https://github.com/yangshun
+  image_url: https://github.com/yangshun.png
+  page: true
+  socials:
+    x: yangshunz
+    github: yangshun
+
+slorber:
+  name: Sébastien Lorber
+  title: Docusaurus maintainer
+  url: https://sebastienlorber.com
+  image_url: https://github.com/slorber.png
+  page:
+    # customize the url of the author page at /blog/authors/<permalink>
+    permalink: '/all-sebastien-lorber-articles'
+  socials:
+    x: sebastienlorber
+    linkedin: sebastienlorber
+    github: slorber
+    newsletter: https://thisweekinreact.com
