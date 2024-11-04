@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_242_saurus=self.webpackChunk_242_saurus||[]).push([[705],{5127:s=>{s.exports=JSON.parse('{"metadata":{"permalink":"/242saurus/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":5,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
